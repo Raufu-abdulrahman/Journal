@@ -10,6 +10,9 @@
     <div class="container mt-5">
         <h2>{{ journal.title }}</h2>
         <p>{{ journal.content }}</p>
+        <p>Created on {{journal.date_created}}</p>
+        <p>Updated on {{journal.date_updated}}</p>
+        <p>By {{journal.user}}</p>
         <a href="{% url 'update' journal.id %}" class="btn btn-warning">Edit</a>
         <a href="{% url 'home' %}" class="btn btn-secondary">Back</a>
     </div>

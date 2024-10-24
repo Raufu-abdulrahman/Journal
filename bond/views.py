@@ -3,7 +3,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 
 from .forms import CustomUserCreationForm, CustomAuthenticationForm
-from .forms import PersonaForm , JournalForm
+from .forms import PersonaForm , JournalForm, SearchForm
 
 from .models import Profile, Persona, Journal
 
@@ -62,10 +62,16 @@ def profile(request):
 def journal(request):
     journals = Journal.objects.all()
     profile = request.user.profile
+    form = SearchForm()
     
+    if 'query' in request.GET:
+        query = request.GET['query']
+        journals = journals.filter(title__icontains=query) | journals.filter(content__icontains=query)
+
     context = {
         'journals':journals,
-        'profile':profile
+        'profile':profile,
+        'form': form
     }
     return render(request, 'journal/home.html', context=context)
 

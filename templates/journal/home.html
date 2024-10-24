@@ -9,6 +9,12 @@
 <body>
     <div class="container mt-5">
         <h2 class="text-center">My Journals</h2>
+
+        <form method="get" class="mb-4">
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+
         <a href="{% url 'new_journal' %}" class="btn btn-success mb-3">New Journal</a>
         <ul class="list-group">
             {% for journal in journals %}
