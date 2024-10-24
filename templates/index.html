@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home -  A Place To Live</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        a{
+            text-style: none;
+        }
+    </style>
+</head>
+<body>
+    
+    <h1>PERSONAL TABLE</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Quote</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for person in people %}
+                <tr>
+                    <td>{{person.name}}</td>
+                    <td>{{person.age}}</td>
+                    <td>{{person.quote}}</td>
+                </tr>
+            {% endfor %}
+        <tbody>
+    </table>
+
+    <button><a href="{% url "form" %}">Back To Form</a></button>
+
+    <hr>
+
+    <h2>Details Of Current User</h2>
+    <p>Username: {{profile.user.username}}</p>
+    <p>Email: {{ profile.user.email }}</p>
+    <p>Bio: {{ profile.bio }}</p>
+    <p>Location: {{ profile.location }}</p>
+
+
+    <div>
+        <p>Links To Everywhere</p>
+        <p><a href="{% url "form" %}">Persona Form</a></p>
+        <p><a href="{% url "register" %}">Register Form</a></p>
+        <p><a href="{% url "login" %}">Login Form</a></p>
+        <p><a href="{% url "new_journal" %}">New Journal</p>
+        <p><a href="{% url "profile" %}">Profile</a></p>
+        <p><a href="{% url "journal" %}">Journals</a></p>
+        <p><a href="{% url 'logout' %}">Logout</a></p>
+    </div>
+
+    <form method="post" action="{% url 'logout' %}" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+    </form>
+
+</body>
+</html>
